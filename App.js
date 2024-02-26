@@ -1,16 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { Provider } from "react-redux";
+import { StyleSheet, Text, View , Switch} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TabsNavigation from "./Navigation/TabsNavigation";
-
-import { Provider } from "react-redux";
 import {store} from './Store'
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <Provider store={store}>
-      
+       <Switch   style={styles.switch}/>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -35,6 +34,10 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
   },
+  switch:{
+    top: 15
+  }
+  
 
   
 

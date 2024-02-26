@@ -12,8 +12,6 @@ export default function App() {
   };
   const Stack = createNativeStackNavigator();
   return (
-    <>
-    
     <View style={isDarkModeEnabled ? styles.containerDark : styles.container}>
     <Switch  style={styles.Switch} value={isDarkModeEnabled} onValueChange={toggleMode} />
       <Text style={isDarkModeEnabled ? styles.textDark:styles.textLight}>
@@ -22,8 +20,6 @@ export default function App() {
       
       <Text style={isDarkModeEnabled ? styles.textDark:styles.textLight}>Hello Profile  page  </Text>
     </View>
-
-</>
   );
 }
 
@@ -34,6 +30,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+   
   },
   Switch: {
    position : "absolute",

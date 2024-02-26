@@ -5,4 +5,9 @@ reducer: {
     DarkMode : DarkModeReducer
 }
 
-}) 
+}) ;
+export default store ; 
+
+
+
+

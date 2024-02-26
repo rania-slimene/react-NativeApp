@@ -36,7 +36,7 @@ export default function App() {
   const getMovies = async () => {
     try {
       const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users"
+        "http://192.168.1.13:8080/cours"
       );
       const json = await response.json();
       setUsers(json);
@@ -52,42 +52,29 @@ export default function App() {
   }, []);
 
   return (
-    <>
-     
-      <View style={styles.header} >
-      <View style={isDarkModeEnabled ? styles.containerDark : styles.containerLight}>
-      <Text style={styles.text}>
-        {isDarkModeEnabled ? 'Dark Mode Enabled' : 'Light Mode Enabled'}
-      </Text>
+    < View style={styles.header}>
+    <View style={isDarkModeEnabled ? styles.containerDark : styles.header}>
       <Switch  style={styles.Switch} value={isDarkModeEnabled} onValueChange={toggleMode} />
-    </View>
-        {/* <Switch style={styles.Switch} value={isSwitchOn} onValueChange={onToggleSwitch} /> */}
-        {/* <TouchableOpacity
-          style={styles.Switch}
-          onPress={() => dispatch(toggleDark())}
-        >
-          {isDarkMode ? <Text>Switch to Light Mode</Text>  : <Text>Switch to Dark Mode</Text>}
-          <Text style={styles.Switchtext}>Dark Mode</Text>
-        </TouchableOpacity> */}
+      {/* <Text style={styles.text}>
+        {isDarkModeEnabled ? 'Dark Mode Enabled' : 'Light Mode Enabled'}
+      </Text> */}
+      <Searchbar style={styles.search} placeholder="Search" />
+      <Text style={isDarkModeEnabled ? styles.listDark : styles.list}     > List of users </Text>
 
-        <Searchbar style={styles.search} placeholder="Search" />
-      </View>
-      <Text style={styles.list}> List of users </Text>
-
-      <FlatList
+      <FlatList style={styles.flat}
         data={users}
         renderItem={({ item }) => (
           <Card.Title
-            style={styles.card}
-            title={item.name}
-            subtitle={item.phone}
+            style={ styles.card}
+            title={item.nom}
+            subtitle={item.orders}
             key={item.id}
             left={(props) => <Avatar.Icon {...props} icon="folder" size={50} />}
           />
         )}
         keyExtractor={(item) => item.id}
         numColumns={1}
-        ItemSeparatorComponent={() => <View style={styles.espace} />}
+        ItemSeparatorComponent={() => <View style={isDarkModeEnabled ? styles.espaceDark : styles.espace} />}
         //showsVerticalScrollIndicator={false}
       />
       {/* <View style={styles.container}>
@@ -98,19 +85,12 @@ export default function App() {
         ))}
       </View> */}
      
-    </>
+    </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-
- 
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-  },
-
   text: {
     fontSize: 20,
     marginVertical: 5,
@@ -119,28 +99,49 @@ const styles = StyleSheet.create({
   },
 
   header: {
+    flex : 1,
     position: "relative",
     justifyContent: "flex-start",
-    backgroundColor: "#a6f2db",
+    backgroundColor: "white",
     width: "100%",
     height: 150,
+  },
+  containerDark: {
+    flex : 1,
+    position: "relative",
+    justifyContent: "flex-start",
+    backgroundColor: "black",
+    width: "100%",
+    height: 150,
+  },
+  flat:{
+  top:120
   },
   search: {
     position: "absolute",
     top: 50,
     width: 350,
     marginLeft: 21,
-    backgroundColor: "white",
+    backgroundColor: "#f2f2f2",
   },
   list: {
+    color:'black',
     backgroundColor: "white",
     fontSize: 20,
+    top:100,
+    marginTop:40
   },
-
+  listDark: {
+    backgroundColor: "black",
+    fontSize: 20,
+    color: "white",
+    top:100,
+    marginTop:40
+  },
   card: {
     backgroundColor: "#f1fafb",
     padding: 30,
-    borderRadius: 50,
+    borderRadius: 200,
     shadowColor: "red",
     shadowOffset: {
       width: 0,
@@ -150,14 +151,20 @@ const styles = StyleSheet.create({
     shadowRadius: 100,
     elevation: 1,
   },
-
+  
   espace: {
     height: 20,
     backgroundColor: "white",
   },
+  espaceDark:{
+
+    height: 20,
+    backgroundColor: "black", 
+  },
+
   Switch: {
-   
-    marginTop: 40,
+   position : 'absolute',
+    right:5
   
   },
   Switchtext: {
@@ -166,18 +173,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
     top: 10,
   },
-    containerDark: {
-    flex: 1,
-    backgroundColor: "black",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  containerLight: {
-    flex: 1,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-
 });
