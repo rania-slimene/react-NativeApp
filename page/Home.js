@@ -36,7 +36,7 @@ export default function App() {
   const getMovies = async () => {
     try {
       const response = await fetch(
-        "http://192.168.1.13:8080/cours"
+        "http://192.168.219.118:8080/cours"
       );
       const json = await response.json();
       setUsers(json);
